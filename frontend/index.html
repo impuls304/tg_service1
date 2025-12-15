@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мастер на дом — Профессиональная поклейка обоев</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/web/styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero" id="home">
+        <div class="hero__content">
+          <p class="eyebrow">Мини-приложение Telegram</p>
+          <h1>Мастер на дом</h1>
+          <p class="lead">
+            Профессиональная поклейка обоев и комплексные услуги по ремонту с
+            гарантией качества.
+          </p>
+          <div class="cta-group">
+            <button class="cta" data-scroll="portfolio">Портфолио</button>
+            <button class="cta ghost" data-scroll="services">Услуги</button>
+            <button class="cta outline" data-scroll="contact">Связаться</button>
+          </div>
+        </div>
+        <div class="hero__badge">
+          <span>Премиум сервис</span>
+          <strong>10+ лет опыта</strong>
+        </div>
+      </header>
+
+      <main>
+        <section class="section" id="portfolio">
+          <div class="section__head">
+            <div>
+              <p class="eyebrow">Примеры работ</p>
+              <h2>Портфолио</h2>
+            </div>
+            <p>Нажмите на фото, чтобы развернуть проект на полный экран.</p>
+          </div>
+          <div class="grid" id="portfolio-grid"></div>
+        </section>
+
+        <section class="section muted" id="services">
+          <div class="section__head">
+            <div>
+              <p class="eyebrow">Что делаем</p>
+              <h2>Услуги</h2>
+            </div>
+            <p>Цены ориентировочные, финальная смета формируется после замера.</p>
+          </div>
+          <div class="grid grid--services" id="services-grid"></div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="contact-card">
+            <div>
+              <p class="eyebrow">Расчет стоимости</p>
+              <h2>Связаться с мастером</h2>
+              <p>
+                Заполните мини-форму и получите предварительный расчет в личном
+                Telegram-диалоге.
+              </p>
+              <div class="contact-list">
+                <div>
+                  <span>Телеграм</span>
+                  <a id="tg-handle" href="https://t.me/master_example" target="_blank"
+                    >@master_example</a
+                  >
+                </div>
+                <div>
+                  <span>График</span>
+                  <strong>ежедневно 09:00–21:00</strong>
+                </div>
+              </div>
+            </div>
+            <div class="contact-actions">
+              <button class="cta" id="btn-estimate">Получить расчет стоимости</button>
+              <button class="cta outline" id="btn-write">Написать мастеру</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>© <span id="year"></span> Мастер на дом. Все права защищены.</p>
+      </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox__close" id="lightbox-close" aria-label="Закрыть">×</button>
+      <img id="lightbox-image" alt="" />
+      <div class="lightbox__caption">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-description"></p>
+      </div>
+    </div>
+
+    <script type="module" src="/web/app.js"></script>
+  </body>
+</html>
