@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     telegram_webhook_secret: Optional[str] = Field(
         default=None, alias="TELEGRAM_WEBHOOK_SECRET"
     )
+    telegram_web_app_url: Optional[AnyUrl] = Field(
+        default=None, alias="TELEGRAM_WEB_APP_URL"
+    )
     webhook_base_url: Optional[AnyUrl] = Field(
         default=None, alias="TELEGRAM_WEBHOOK_BASE_URL"
     )

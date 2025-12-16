@@ -1,9 +1,46 @@
 const API_BASE = "/api";
 const tg = window.Telegram?.WebApp;
+const userChip = document.getElementById("user-chip");
+let telegramUser = null;
+
+function applyTelegramTheme() {
+  if (!tg?.themeParams) return;
+  const root = document.documentElement;
+  const theme = tg.themeParams;
+  const mapping = {
+    "--bg": theme.bg_color,
+    "--surface": theme.secondary_bg_color,
+    "--text": theme.text_color,
+    "--accent": theme.button_color,
+    "--accent-dark": theme.button_color,
+  };
+  Object.entries(mapping).forEach(([key, value]) => {
+    if (value) {
+      root.style.setProperty(key, value);
+    }
+  });
+}
+
+function renderUserChip(user) {
+  if (!userChip || !user) return;
+  const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ") || "Гость";
+  const username = user.username ? `@${user.username}` : `ID ${user.id}`;
+  userChip.textContent = `${fullName} • ${username}`;
+  userChip.hidden = false;
+}
 
 if (tg) {
   tg.ready();
   tg.expand();
+  telegramUser = tg.initDataUnsafe?.user ?? null;
+  if (telegramUser) {
+    console.log("User:", telegramUser);
+    renderUserChip(telegramUser);
+  }
+  applyTelegramTheme();
+  tg.onEvent?.("themeChanged", applyTelegramTheme);
+} else {
+  console.warn("Telegram WebApp API недоступен. Проверьте запуск внутри Telegram.");
 }
 
 const iconMap = {
@@ -140,6 +177,16 @@ btnEstimate.addEventListener("click", async () => {
     });
 
     if (!response.ok) throw new Error("Не удалось отправить запрос");
+    if (tg?.sendData) {
+      tg.sendData(
+        JSON.stringify({
+          action: "estimate_request",
+          status: "submitted",
+          user_id: telegramUser?.id ?? null,
+          requested_at: new Date().toISOString(),
+        })
+      );
+    }
     if (tg?.showPopup) {
       tg.showPopup({ title: "Отлично", message: "Я свяжусь с вами в ближайшее время." });
     } else {
